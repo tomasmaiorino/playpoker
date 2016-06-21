@@ -1,0 +1,12 @@
+log/
+.idea
+classes/
+*.class
+*.log
+surefire-reports/
+.settings
+.project
+target
+Gemfile.lock
+bin
+tmp

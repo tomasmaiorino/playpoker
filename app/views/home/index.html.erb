@@ -1,0 +1,161 @@
+ <!-- Portfolio Grid Section -->
+    <section id="portfolio">
+        <div class="container">
+        <%= form_tag('/home/play', method: :post) do %>           
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Let's PLay</h2>
+                    <hr class="star-primary">
+                </div>
+            </div>
+             <div class="row">
+                <div class="col-lg-12 text-center">
+                    <p>Choose the numbers of playes, choose your own and then click "PLAY".</p>
+                </div>
+            </div>
+             <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="form-group">
+                        <label>Players:</label>
+                        <label class="radio-inline">
+                            <%=radio_button_tag 'players_qt', "1", (!@player.players_qt.nil? && @player.players_qt.to_i == 1)%>1
+                        </label>
+                        <label class="radio-inline">
+                            <%=radio_button_tag 'players_qt', "2", (!@player.players_qt.nil? && @player.players_qt.to_i == 2)%>2
+                        </label>
+                        <label class="radio-inline">
+                            <%=radio_button_tag 'players_qt', "3", (!@player.players_qt.nil? && @player.players_qt.to_i == 3)%>3
+                        </label>
+                        <label class="radio-inline">
+                            <%=radio_button_tag 'players_qt', "4", (!@player.players_qt.nil? && @player.players_qt.to_i == 4)%>4
+                        </label>
+                        <p class="help-block text-danger"><%= show_errors(@player, :players_qt).sub(',', '') unless show_errors(@player, :players_qt).nil? %></p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="form-group">
+                        <label>Which player are you?</label>
+                        <label class="radio-inline">
+                            <%=radio_button_tag 'player_chosen', "1", (!@player.player_chosen.nil? && @player.player_chosen.to_i == 1)%>1
+                        </label>
+                        <label class="radio-inline">
+                            <%=radio_button_tag 'player_chosen', "2", (!@player.player_chosen.nil? && @player.player_chosen.to_i == 2)%>2
+                        </label>
+                        <label class="radio-inline">
+                            <%=radio_button_tag 'player_chosen', "3", (!@player.player_chosen.nil? && @player.player_chosen.to_i == 3)%>3
+                        </label>
+                        <label class="radio-inline">
+                            <%=radio_button_tag 'player_chosen', "4", (!@player.player_chosen.nil? && @player.player_chosen.to_i == 4)%>4
+                        </label>
+                        <p class="help-block text-danger"><%= show_errors(@player, :player_chosen).sub(',', '') unless show_errors(@player, :player_chosen).nil? %></p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div id="success"></div>
+                    <div class="row" align="center">
+                        <div class="form-group col-xs-12">
+                            <button type="submit" class="btn btn-success btn-lg">Play</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% end %>
+        </div>
+    </section>
+
+    <!-- About Section -->    
+    <section class="success" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>About</h2>
+                    <hr class="star-light">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-lg-offset-2">
+                    <p>Playpoker is a ruby on rails app where you can have some fun and to learn a lite bit of ruby on rails applications.</p>
+                </div>
+                <div class="col-lg-4">
+                    <p>You can download the source, and if desire, help to improve the app. Here is the github link for download:
+                    <a href="https://github.com/tomasmaiorino/TSM/tree/master/play_poker">playpoker</a></p>
+                </div>
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <a href="#" class="btn btn-lg btn-outline">
+                        <i class="fa fa-download"></i> Download the source from git.
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <% if !@winner_player.nil? %>
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Result</h2>
+                    <hr class="star-primary">
+                    <% if !@winner_player.nil? %>
+                        <% if @you_win %>
+                            <div class="row">
+                                <div class="col-lg-12 text-center">
+                                    <p>The Winner is You (player <%=@winner_player.id%>) with a <%=@winner_player.game_name%>.</p>
+                                </div>
+                            </div>
+                        <% else %>
+                            <div class="row">
+                                <div class="col-lg-12 text-center">
+                                    <p>The Winner is Player <%=@winner_player.id%>. with <%=@winner_player.game_name%>.</p>
+                                </div>
+                            </div>
+                        <% end %>
+                    <% end %>
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <% if !@winner_player.nil? 
+                                @winner_player.cards.each{|c| %>
+                                <%= image_tag("/#{get_card_url(c)}", style: 'width: 110px; height: 150px') %>
+                            <% } end %>
+                            <% if !@winner_player.nil? && !@player.player_chosen.nil? && !@winner_player.id != @player.player_chosen %>
+                        </div>
+                    </div>
+                     <% if !@others_players.nil? && !@others_players.empty?%>
+                            <hr>
+                                 <% @others_players.each{|o| %>
+                                <div class="row">
+                                    <div class="col-lg-12 text-center">
+                                    <%o.cards.each{|c| %>                            
+                                        <%= image_tag("/#{get_card_url(c)}", style: 'width: 65px; height: 100px') %>                                
+                                    <% } %>
+                                    </div>
+                                </div>
+                                <hr class="star-primary">
+                           <%} %>
+                    <% end %>                           
+                     <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <p>Damn, this time you didn't win because you chose the player <%=@player.player_chosen%>. Do you want to try again?</p>
+                        </div>
+                    </div>
+                    <% end %>
+            <hr class="star-primary">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div id="success"></div>
+                    <div class="row" align="center">
+                        <div class="form-group col-xs-12">
+                            <button type="button" class="btn btn-success btn-lg" onclick="scroolTo('#portfolio')">Play Again</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="success"></div>
+        </div>
+    </section>
+    <% end %>    
