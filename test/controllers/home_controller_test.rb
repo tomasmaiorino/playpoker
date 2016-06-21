@@ -5,6 +5,26 @@ class HomeControllerTest < ActionController::TestCase
   #   assert true
   # end
 
+  test "should return player to index" do
+    get :index    
+    assert_response :success
+    assert_not_nil assigns(:player)
+  end
+
+  test "should return player error" do
+    #post :play, :player_chosen => subcategory.id.to_s, :sort => 'title'
+    post :play
+    assert_response :success
+    #assert_not_nil assigns(:player.errors)
+    assert_nil assigns(:player_chosen)  
+  end
+
+test "should have the necessary required validators" do
+  player = Player.new([], 0, 0)
+  assert_not player.valid?
+  assert_equal [ :players_qt, :player_chosen], player.errors.keys
+end
+
 =begin
 def setup
     info = ('')
