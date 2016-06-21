@@ -82,12 +82,12 @@
                     <p>Playpoker is a ruby on rails app where you can have some fun and to learn a lite bit of ruby on rails applications.</p>
                 </div>
                 <div class="col-lg-4">
-                    <p>You can download the source, and if desire, help to improve the app. Here is the github link for download:
-                    <a href="https://github.com/tomasmaiorino/TSM/tree/master/play_poker">playpoker</a></p>
+                    <p>You can download the source, and if desire, help to improve the app. Here is the github link for clone the repository:
+                    <a href="https://github.com/tomasmaiorino/playpoker">https://github.com/tomasmaiorino/playpoker</a></p>
                 </div>
                 <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <a href="#" class="btn btn-lg btn-outline">
-                        <i class="fa fa-download"></i> Download the source from git.
+                    <a href="https://github.com/tomasmaiorino/playpoker/archive/master.zip" class="btn btn-lg btn-outline">
+                        <i class="fa fa-download"></i> Download the source from github.
                     </a>
                 </div>
             </div>
@@ -126,7 +126,7 @@
                         </div>
                     </div>
                      <% if !@others_players.nil? && !@others_players.empty?%>
-                            <hr>
+                            <hr class="star-primary">
                                  <% @others_players.each{|o| %>
                                 <div class="row">
                                     <div class="col-lg-12 text-center">
@@ -135,14 +135,15 @@
                                     <% } %>
                                     </div>
                                 </div>
-                                <hr class="star-primary">
                            <%} %>
-                    <% end %>                           
-                     <div class="row">
-                        <div class="col-lg-12 text-center">
-                            <p>Damn, this time you didn't win because you chose the player <%=@player.player_chosen%>. Do you want to try again?</p>
-                        </div>
-                    </div>
+                    <% end %>
+                        <% if !@others_players.nil? && !@others_players.empty? && !@you_win %>
+                             <div class="row">
+                                <div class="col-lg-12 text-center">
+                                    <p>Damn, this time you didn't win because you chose the player <%=@player.player_chosen%>. Do you want to try again?</p>
+                                </div>
+                            </div>
+                        <% end %>
                     <% end %>
             <hr class="star-primary">
             <div class="row">
