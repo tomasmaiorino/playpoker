@@ -1,29 +1,72 @@
 require 'test_helper'
 
 class HomeControllerTest < ActionController::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
 
   test "should return player to index" do
     get :index    
     assert_response :success
     assert_not_nil assigns(:player)
+    assert_template :index
   end
 
   test "should return player error" do
     #post :play, :player_chosen => subcategory.id.to_s, :sort => 'title'
     post :play
     assert_response :success
-    #assert_not_nil assigns(:player.errors)
-    assert_nil assigns(:player_chosen)  
+    player = assigns(:player)
+    assert_not_nil player.errors
+    assert player.errors.messages[:player_chosen]
+    assert player.errors.messages[:players_qt]
+    assert_template :index
   end
 
-test "should have the necessary required validators" do
-  player = Player.new([], 0, 0)
-  assert_not player.valid?
-  assert_equal [ :players_qt, :player_chosen], player.errors.keys
-end
+  test "should return player error for player chosen" do
+    post :play, :players_qt => 1
+    assert_response :success
+    player = assigns(:player)
+    assert_not_nil player.errors
+    assert player.errors.messages[:player_chosen]
+    assert_nil player.errors.messages[:players_qt]
+    assert_template :index
+  end
+
+  test "should return player error for player qt" do
+    post :play, :player_chosen => 1
+    assert_response :success
+    player = assigns(:player)
+    assert_not_nil player.errors
+    assert player.errors.messages[:players_qt]
+    assert_nil player.errors.messages[:player_chosen]
+    assert_template :index
+  end
+
+  test "should return player error for player chosen for player_chosen bigger than players qt" do
+    post :play, :player_chosen => 3, :players_qt => 1
+    assert_response :success
+    player = assigns(:player)
+    assert_not_nil player.errors
+    assert player.errors.messages[:player_chosen]
+    assert_nil player.errors.messages[:players_qt]
+    assert_template :index
+  end
+
+  test "should return player error for player chosen for player_chosen and players qt equal one" do
+    post :play, :player_chosen => 1, :players_qt => 1
+    assert_response :success
+    player = assigns(:player)
+    assert_not_nil player.errors
+    assert player.errors.messages[:player_chosen]    
+    assert_nil player.errors.messages[:players_qt]
+    assert_template :index
+  end
+
+
+  test "should have the necessary required validators" do
+    player = Player.new([], 0, 0)
+    assert_not player.valid?
+    assert_equal [ :players_qt, :player_chosen], player.errors.keys
+    assert_template :index
+  end
 
 =begin
 def setup

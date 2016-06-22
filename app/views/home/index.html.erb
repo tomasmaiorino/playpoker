@@ -111,7 +111,8 @@
                         <% else %>
                             <div class="row">
                                 <div class="col-lg-12 text-center">
-                                    <p>The Winner is Player <%=@winner_player.id%>. with <%=@winner_player.game_name%>.</p>
+                                    <p>Damn, this time you didn't win. The Winner was Player <%=@winner_player.id%>. with <%=@winner_player.game_name%>
+                                    .</p>
                                 </div>
                             </div>
                         <% end %>
@@ -137,13 +138,6 @@
                                 </div>
                            <%} %>
                     <% end %>
-                        <% if !@others_players.nil? && !@others_players.empty? && !@you_win %>
-                             <div class="row">
-                                <div class="col-lg-12 text-center">
-                                    <p>Damn, this time you didn't win because you chose the player <%=@player.player_chosen%>. Do you want to try again?</p>
-                                </div>
-                            </div>
-                        <% end %>
                     <% end %>
             <hr class="star-primary">
             <div class="row">

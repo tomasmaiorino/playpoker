@@ -34,16 +34,17 @@ class Player
 	end
 	
 	def check_player_chosen
-		puts "check_player_chosen"
+	    Rails.logger.info "check_player_chosen"
 		if (!@player_chosen.nil? && @player_chosen.to_i > 0 && !@players_qt.nil? && @players_qt.to_i > 0)
 			if @player_chosen > @players_qt
-				puts "has error"
+				Rails.logger.info "Player chose higher than players qt"
 				append_message = @players_qt.to_i == 1 ? "player" : "players"
-				puts "append_message #{append_message}"
 	  			errors.add(:player_chosen, "Man, how can you be the player #{@player_chosen} if we have only #{@players_qt} #{append_message}. Let's choose another one, rigth?")
+			elsif @player_chosen.to_i == 1 and @players_qt.to_i == 1
+				Rails.logger.info "Both player_chosen and players_qt equal 1"
+				errors.add(:player_chosen, "Man, how can you play with only your self ? Let's choose another one, rigth!?")
 	  		end
 	  	end
 	end
-
 
 end

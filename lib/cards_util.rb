@@ -15,4 +15,8 @@ class CardsUtil
 		url_temp = @cards_type[card[card.length - 1]]
 		url_temp.sub(/@/, card)
 	end
+
+	def get_game_name_view(game_name)
+		
+	end
 end
