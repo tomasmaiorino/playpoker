@@ -105,13 +105,13 @@
                         <% if @you_win %>
                             <div class="row">
                                 <div class="col-lg-12 text-center">
-                                    <p>The Winner is You (player <%=@winner_player.id%>) with a <%=@winner_player.game_name%>.</p>
+                                    <p>The Winner is You (player <%=@winner_player.id%>) with a <%= t('game.name.' << @winner_player.game_name.downcase) %>.</p>
                                 </div>
                             </div>
                         <% else %>
                             <div class="row">
                                 <div class="col-lg-12 text-center">
-                                    <p>Damn, this time you didn't win. The Winner was Player <%=@winner_player.id%>. with <%=@winner_player.game_name%>
+                                    <p>Damn, this time you didn't win. The Winner was Player <%=@winner_player.id%>. with <%= t('game.name.' << @winner_player.game_name.downcase) %>
                                     .</p>
                                 </div>
                             </div>

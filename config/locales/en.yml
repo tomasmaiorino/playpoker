@@ -21,3 +21,14 @@
 
 en:
   hello: "Hello world"
+  game:
+    name:
+      straight_flush: 'straight flush'
+      quadra: 'four'
+      full_house: 'full house'
+      flush: 'flush'
+      straight: 'straight'
+      trinca: 'trinca'
+      two_pairs: 'two pairs'
+      a_pair: 'a pair'
+      higher_card: 'higher card' 
