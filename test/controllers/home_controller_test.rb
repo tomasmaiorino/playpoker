@@ -64,8 +64,7 @@ class HomeControllerTest < ActionController::TestCase
   test "should have the necessary required validators" do
     player = Player.new([], 0, 0)
     assert_not player.valid?
-    assert_equal [ :players_qt, :player_chosen], player.errors.keys
-    assert_template :index
+    assert_equal [:players_qt, :player_chosen], player.errors.keys
   end
 
 =begin
