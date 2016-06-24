@@ -105,13 +105,13 @@
                         <% if @you_win %>
                             <div class="row">
                                 <div class="col-lg-12 text-center">
-                                    <p>The Winner is You (player <%=@winner_player.id%>) with a <%= t('game.name.' << @winner_player.game_name.downcase) %>.</p>
+                                    <p>The Winner is You (player <%=@winner_player.id%>) with <%= t('game.name.' << @winner_player.game_name.downcase) %>.</p>
                                 </div>
                             </div>
                         <% else %>
                             <div class="row">
                                 <div class="col-lg-12 text-center">
-                                    <p>Damn, this time you didn't win. The Winner was Player <%=@winner_player.id%>. with <%= t('game.name.' << @winner_player.game_name.downcase) %>
+                                    <p>Damn, this time you didn't win. The Winner  with <%= t('game.name.' << @winner_player.game_name.downcase) %> was Player <%=@winner_player.id%>
                                     .</p>
                                 </div>
                             </div>
@@ -128,11 +128,22 @@
                     </div>
                      <% if !@others_players.nil? && !@others_players.empty?%>
                             <hr class="star-primary">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <p>Here is the others players cards:</p>
+                                </div>
+                            </div>
+                            <hr class="star-primary">
                                  <% @others_players.each{|o| %>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <p>player <%=o.id%></p>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-lg-12 text-center">
                                     <%o.cards.each{|c| %>                            
-                                        <%= image_tag("/#{get_card_url(c)}", style: 'width: 65px; height: 100px') %>                                
+                                        <%= image_tag("/#{get_card_url(c)}", style: 'width: 70px; height: 100px') %>
                                     <% } %>
                                     </div>
                                 </div>
