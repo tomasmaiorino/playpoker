@@ -27,3 +27,6 @@ $ rake test
 
 ###### To run the application the rails commannd:
 $ rails server
+
+###### Demo application:
+https://polar-sea-96842.herokuapp.com/
